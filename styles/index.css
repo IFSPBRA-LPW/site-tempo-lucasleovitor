@@ -1,0 +1,122 @@
+:root{
+    --fundo-menu: rgb(0, 0, 64);
+    --fundo-momento: rgb(122, 81, 204);
+    --fundo-detalhar: rgb(99, 98, 98);
+    --fundo-hora: rgb(80, 77, 77);
+    --cor-fonte: white;
+    --raio-borda: 12px;
+}
+
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: var(--fundo-menu);
+    color: var(--cor-fonte);
+}
+header{
+    display: flex;
+    justify-content: space-between;
+}
+form{
+    display: flex;
+    gap: 1rem;
+}
+
+form input{
+    background-color: rgb(184, 184, 184);
+    padding: 5%;
+}
+
+form button{
+    border-radius: var(--raio-borda);
+    background-color: var(--fundo-momento);
+}
+
+main{
+    display: flex;
+    justify-content: center;
+    gap: 10%;
+}
+nav{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 5%;
+}
+#secao-equerda{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+#clima-momento{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    background-color: var(--fundo-momento);
+    border-radius: var(--raio-borda);
+    margin-bottom: 2%;
+}
+#detalhar{
+    display: flex;
+    gap: 1rem;
+    justify-content: space-around;
+}
+#detalhar div{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--fundo-detalhar);
+    border-radius: var(--raio-borda);
+}
+
+#clima-hora{
+    width: 80%;
+    display: flex;
+    gap: 2rem;
+    flex-direction: column;
+    background-color: var(--fundo-hora);
+    border-radius: var(--raio-borda);
+}
+#clima-hora div{
+    margin: 0 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-radius: var(--raio-borda);
+    background-color: var(--fundo-detalhar);
+}
+
+#semana{
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+
+}
+.dia{
+    width: 80%;
+    background-color: var(--fundo-detalhar);
+    padding: 1rem;
+    border-radius: var(--raio-borda);
+}
+.variacao{
+    display: flex;
+}
+
+@media(max-width:800px){
+    main{
+    flex-direction: column;
+
+}
+    form{
+        flex-direction: column;
+    }
+
+    #secao-equerda{
+        margin: 5% 0;
+    }
+    #detalhar{
+        flex-wrap: wrap;
+    }
+    #semana{
+        flex-wrap: wrap;
+    }
+}
