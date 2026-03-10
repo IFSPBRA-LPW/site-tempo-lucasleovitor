@@ -25,6 +25,5 @@ hourly: [
 { time: "☁7 PM", temp: 18 }, 
 { time: "☁8 PM", temp: 18 }, 
 { time: "☁9 PM", temp: 17 }, 
-{ time: "☁10 PM", temp: 17 }, 
 ], 
 }
