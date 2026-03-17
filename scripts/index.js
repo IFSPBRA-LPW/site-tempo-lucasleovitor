@@ -1,6 +1,5 @@
 import  {cityWeather}  from "./data.js";
 
-
 function climaHoje(city,country,date,icon,temperature,feelsLike,humidity,wind,precipitation){
     function climaMomento(city,country,date,icon,temperature){
         
@@ -28,7 +27,6 @@ function semana(daily){
     for(let i = 0; i<daily.length;i++){
         semanaHTML.append(criarDia(daily[i]))
     }
-    console.log(semanaHTML)
     function criarDia(daily){
         const div = document.createElement('div')
         const day = document.createElement('p')
