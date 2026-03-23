@@ -1,4 +1,10 @@
-import  {cityWeather}  from "./data.js";
+import  {criarCidade,getDadosAPI,cidadePadrao}  from "./data.js";
+const form = document.querySelector('form')
+form.addEventListener("submit",(e)=>{
+    e.preventDefault()
+    const input = document.querySelector('input').value
+    var cityWeather = getDadosAPI(input)
+})
 
 function climaHoje(city,country,date,icon,temperature,feelsLike,humidity,wind,precipitation){
     function climaMomento(city,country,date,icon,temperature){
@@ -80,4 +86,4 @@ function renderizar(cityWeather){
     semana(cityWeather['daily'])
     climaHora(cityWeather['hourly'])
 }
-renderizar(cityWeather)
+renderizar(cidadePadrao())
