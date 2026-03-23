@@ -1,5 +1,5 @@
 import { API_KEY } from "./config.js"
-export async function getDadosAPI(city){
+async function getDadosAPI(city){
     const response = await fetch(
         `https://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${city}&days=7`
     )
@@ -8,7 +8,7 @@ export async function getDadosAPI(city){
     }
     let dados = await response.json()
     console.log(dados)
-    return criarCidade(dados)
+    return dados
    
 }
 
@@ -46,7 +46,8 @@ export function cidadePadrao(){
     return cidade
 }
 
-export function criarCidade(bruto){
+export async function criarCidade(input){
+    let bruto = await getDadosAPI(input)
     diario = bruto['forescast']['forecastday']
     let cidade= { 
         city: bruto['location']['name'], 
