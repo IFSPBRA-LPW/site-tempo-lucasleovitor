@@ -10,93 +10,44 @@ async function getDadosAPI(city){
     return dados
    
 }
-
-export function cidadePadrao(){
-    let cidade= { 
-        city: "RJ", 
-        country: "Brazil", 
-        date: "Tuesday, Aug 5, 2025", 
-        icon: "☀", 
-        temperature: 40, 
-        feelsLike: 20, 
-        humidity: 40, 
-        wind: 10, 
-        precipitation: 0, 
-        daily: [ 
-        { day: "Tue", icon: "🌧", max: 20, min: 14 }, 
-        { day: "Wed", icon: "🌧", max: 21, min: 15 }, 
-        { day: "Thu", icon: "☀", max: 24, min: 14 }, 
-        { day: "Fri", icon: "☀", max: 25, min: 13 }, 
-        { day: "Sat", icon: "⛈", max: 21, min: 15 }, 
-        { day: "Sun", icon: "☁", max: 25, min: 16 }, 
-        
-        { day: "Mon", icon: "🌫", max: 24, min: 15 }, 
-        ], 
-        hourly: [ 
-        { time: "☀3 PM", temp: 20 }, 
-        { time: "☀4 PM", temp: 20 }, 
-        { time: "☀5 PM", temp: 20 }, 
-        { time: "☁6 PM", temp: 19 }, 
-        { time: "☁7 PM", temp: 18 }, 
-        { time: "☁8 PM", temp: 18 }, 
-        { time: "☁9 PM", temp: 17 }, 
-        ], 
-    }
-    return cidade
-}
-
 export async function criarCidade(input){
     try{
-        let bruto = await getDadosAPI(input)
+        var bruto = await getDadosAPI(input)
+        console.log(bruto)
     }catch (error) {
         console.error("Erro ao processar cidade:", error.message);
     }
-    diario = bruto['forescast']['forecastday']
-    horario = bruto['forescast']['forecastday'][0]['hour']
+    let diario = bruto['forecast']['forecastday']
+    let horario = bruto['forecast']['forecastday'][0]['hour']
     let cidade= { 
         city: bruto['location']['name'], 
         country: bruto['location']['country'], 
         date: "Tuesday, Aug 5, 2025", 
         icon: bruto['current']['condition']['icon'], 
         temperature: bruto['current']['temp_c'], 
-        feelsLike: bruto['current']['feelslike_c'], 
-        humidity: bruto['current']['humidity'], 
-        wind: bruto['current']['gust_kph'], 
-        precipitation: bruto['current']['precip_mm'], 
-        daily: [ 
-        // { day: "Tue", icon: "🌧", max: 20, min: 14 }, 
-        // { day: "Wed", icon: "🌧", max: 21, min: 15 }, 
-        // { day: "Thu", icon: "☀", max: 24, min: 14 }, 
-        // { day: "Fri", icon: "☀", max: 25, min: 13 }, 
-        // { day: "Sat", icon: "⛈", max: 21, min: 15 }, 
-        // { day: "Sun", icon: "☁", max: 25, min: 16 }, 
-        // { day: "Mon", icon: "🌫", max: 24, min: 15 }, 
-        ], //PAREI AQUI
-        hourly: [ 
-        // { time: "☀3 PM", temp: 20 }, 
-        // { time: "☀4 PM", temp: 20 }, 
-        // { time: "☀5 PM", temp: 20 }, 
-        // { time: "☁6 PM", temp: 19 }, 
-        // { time: "☁7 PM", temp: 18 }, 
-        // { time: "☁8 PM", temp: 18 }, 
-        // { time: "☁9 PM", temp: 17 }, 
-         ],
+        feelsLike: `${bruto['current']['feelslike_c']}°C`, 
+        humidity: `${bruto['current']['humidity']}%`, 
+        wind: `${bruto['current']['gust_kph']}kpm`, 
+        precipitation: `${bruto['current']['precip_mm'] * 100}%`, 
+        daily: [ ],
+        hourly: [],
     }
     for(let i = 0; i < diario.length;i++){
-        dia = {day: DiaSemana(diario[i]['date']), icon:diario[i]['day']['condition']['icon'], max: diario[i]['day']['maxtemp_c'], min: diario[i]['day']['mintemp_c']
+        let dia = {day: DiaSemana(diario[i]['date']), icon:diario[i]['day']['condition']['icon'], max: diario[i]['day']['maxtemp_c'], min: diario[i]['day']['mintemp_c']
         }
-        cidade[daily].append(dia)
+        cidade['daily'].push(dia)
     }
     for(let i = 15;i<22;i++){
-        hora = {time:[horario['condition']['icon'],`${i}hr`], temp:horario['feelslike_c']}
-        cidade[hourly].append(hora)
+        let hora = {time:[horario[i]['condition']['icon'],`${i}hr`], temp:`${horario[i]['feelslike_c']}°C`}
+        cidade['hourly'].push(hora)
     }
-    console.log('a')
-    console.log(cidade)
+
     return cidade
 }
 
-function DiaSemana(data) {
-    dias=['Seg','ter','Qua','Qui','Sex','Sab','Dom']
-    return dias[data.getDay(data)]; // 0 = Domingo, 1 = Segunda, ..., 6 = Sábado
+function DiaSemana(dia) {
+    let dias=['Seg','ter','Qua','Qui','Sex','Sab','Dom']
+    const dataString = dia; // Natal
+    const data = new Date(dataString + "T12:00:00")
+    return dias[data.getDay()]; // 0 = Domingo, 1 = Segunda, ..., 6 = Sábado
 }

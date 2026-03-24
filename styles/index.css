@@ -7,6 +7,13 @@
     --raio-borda: 12px;
 }
 
+#temp-momento{
+    display:flex;
+    justify-content: space-between;
+    align-items: center
+}
+
+
 body{
     font-family: Arial, Helvetica, sans-serif;
     background-color: var(--fundo-menu);
