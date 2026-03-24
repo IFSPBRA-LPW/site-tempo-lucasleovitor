@@ -15,7 +15,7 @@ export async function criarCidade(input){
         var bruto = await getDadosAPI(input)
         console.log(bruto)
     }catch (error) {
-        console.error("Erro ao processar cidade:", error.message);
+        console.error("Erro ao processar cidade:", error.message)
     }
     let diario = bruto['forecast']['forecastday']
     let horario = bruto['forecast']['forecastday'][0]['hour']
@@ -46,8 +46,7 @@ export async function criarCidade(input){
 }
 
 function DiaSemana(dia) {
-    let dias=['Seg','ter','Qua','Qui','Sex','Sab','Dom']
-    const dataString = dia; // Natal
-    const data = new Date(dataString + "T12:00:00")
-    return dias[data.getDay()]; // 0 = Domingo, 1 = Segunda, ..., 6 = Sábado
+    let dias=['Dom','Seg','ter','Qua','Qui','Sex','Sab']
+    const data = new Date(dia + "T12:00:00")
+    return dias[data.getDay()]
 }
