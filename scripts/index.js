@@ -3,7 +3,7 @@ const form = document.querySelector('form')
 form.addEventListener("submit",(e)=>{
     e.preventDefault()
     const input = document.querySelector('input').value
-    var cityWeather = criarCidade(input)
+    var a = criarCidade(input)
 })
 
 function climaHoje(city,country,date,icon,temperature,feelsLike,humidity,wind,precipitation){

@@ -7,7 +7,6 @@ async function getDadosAPI(city){
         throw new Error ("Erro na busca da API")
     }
     let dados = await response.json()
-    console.log(dados)
     return dados
    
 }
@@ -47,8 +46,13 @@ export function cidadePadrao(){
 }
 
 export async function criarCidade(input){
-    let bruto = await getDadosAPI(input)
+    try{
+        let bruto = await getDadosAPI(input)
+    }catch (error) {
+        console.error("Erro ao processar cidade:", error.message);
+    }
     diario = bruto['forescast']['forecastday']
+    horario = bruto['forescast']['forecastday'][0]['hour']
     let cidade= { 
         city: bruto['location']['name'], 
         country: bruto['location']['country'], 
@@ -69,20 +73,26 @@ export async function criarCidade(input){
         // { day: "Mon", icon: "🌫", max: 24, min: 15 }, 
         ], //PAREI AQUI
         hourly: [ 
-        { time: "☀3 PM", temp: 20 }, 
-        { time: "☀4 PM", temp: 20 }, 
-        { time: "☀5 PM", temp: 20 }, 
-        { time: "☁6 PM", temp: 19 }, 
-        { time: "☁7 PM", temp: 18 }, 
-        { time: "☁8 PM", temp: 18 }, 
-        { time: "☁9 PM", temp: 17 }, 
-        ], 
+        // { time: "☀3 PM", temp: 20 }, 
+        // { time: "☀4 PM", temp: 20 }, 
+        // { time: "☀5 PM", temp: 20 }, 
+        // { time: "☁6 PM", temp: 19 }, 
+        // { time: "☁7 PM", temp: 18 }, 
+        // { time: "☁8 PM", temp: 18 }, 
+        // { time: "☁9 PM", temp: 17 }, 
+         ],
     }
     for(let i = 0; i < diario.length;i++){
         dia = {day: DiaSemana(diario[i]['date']), icon:diario[i]['day']['condition']['icon'], max: diario[i]['day']['maxtemp_c'], min: diario[i]['day']['mintemp_c']
         }
         cidade[daily].append(dia)
     }
+    for(let i = 15;i<22;i++){
+        hora = {time:[horario['condition']['icon'],`${i}hr`], temp:horario['feelslike_c']}
+        cidade[hourly].append(hora)
+    }
+    console.log('a')
+    console.log(cidade)
     return cidade
 }
 
