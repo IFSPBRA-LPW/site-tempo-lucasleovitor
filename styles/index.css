@@ -1,24 +1,52 @@
 :root{
-    --fundo-menu: rgb(0, 0, 64);
-    --fundo-momento: rgb(122, 81, 204);
-    --fundo-detalhar: rgb(99, 98, 98);
-    --fundo-hora: rgb(80, 77, 77);
+    --fundo-menu-dark: rgb(0, 51, 64);
+    --fundo-menu: rgb(21, 158, 192);
+    --fundo-momento: rgb(80, 197, 226);
+    --fundo-momento-dark: rgb(46, 124, 143);
+    --fundo-detalhar-dark: rgb(134, 132, 132);
+    --fundo-detalhar: rgb(185, 185, 185);
+    --fundo-secao-esquerda: rgb(136, 132, 132);
+    --fundo-hora: rgb(180, 180, 180);
+    --fundo-hora-dark: rgb(80, 77, 77);
     --cor-fonte: white;
     --raio-borda: 12px;
 }
 
+.light{
+     --fundo-menu-dark: rgb(0, 51, 64);
+    --fundo-menu: rgb(21, 158, 192);
+    --fundo-momento: rgb(80, 197, 226);
+    --fundo-momento-dark: rgb(46, 124, 143);
+    --fundo-detalhar-dark: rgb(134, 132, 132);
+    --fundo-detalhar: rgb(185, 185, 185);
+    --fundo-secao-esquerda: rgb(136, 132, 132);
+    --fundo-hora: rgb(180, 180, 180);
+    --fundo-hora-dark: rgb(80, 77, 77);
+    --cor-fonte: white;
+    --raio-borda: 12px;
+   
+}
 #temp-momento{
     display:flex;
     justify-content: space-between;
     align-items: center
 }
 
-
 body{
     font-family: Arial, Helvetica, sans-serif;
-    background-color: var(--fundo-menu);
     color: var(--cor-fonte);
 }
+
+body.light{
+    background-color: var(--fundo-menu);
+    
+}
+body.dark{
+    background-color: var(--fundo-menu-dark);
+}
+
+
+
 header{
     display: flex;
     justify-content: space-between;
@@ -54,6 +82,7 @@ nav{
     display: flex;
     flex-direction: column;
 }
+
 #clima-momento{
     display: flex;
     justify-content: space-between;
@@ -62,6 +91,15 @@ nav{
     border-radius: var(--raio-borda);
     margin-bottom: 2%;
 }
+
+#clima-momento.light{
+    background-color: var(--fundo-momento);
+}
+
+#clima-momento.dark{
+    background-color: var(--fundo-momento-dark);
+}
+
 #detalhar{
     display: flex;
     gap: 1rem;
@@ -71,8 +109,13 @@ nav{
     width: 100%;
     display: flex;
     flex-direction: column;
-    background-color: var(--fundo-detalhar);
     border-radius: var(--raio-borda);
+}
+#detalhar.light{
+    background-color: var(--fundo-detalhar);
+}
+#detalhar.dark{
+    background-color: var(--fundo-detalhar-dark);
 }
 
 #clima-hora{
@@ -83,6 +126,13 @@ nav{
     background-color: var(--fundo-hora);
     border-radius: var(--raio-borda);
 }
+#clima-hora.light{
+     background-color: var(--fundo-hora);
+}
+#clima-hora.dark{
+     background-color: var(--fundo-hora-dark);
+}
+
 #clima-hora div{
     margin: 0 10px;
     display: flex;

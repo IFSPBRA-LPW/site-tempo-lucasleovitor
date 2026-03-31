@@ -33,7 +33,7 @@ export async function criarCidade(input){
         hourly: [],
     }
     for(let i = 0; i < diario.length;i++){
-        let dia = {day: DiaSemana(diario[i]['date']), icon:diario[i]['day']['condition']['icon'], max: diario[i]['day']['maxtemp_c'], min: diario[i]['day']['mintemp_c']
+        let dia = {day: diaSemana(diario[i]['date']), icon:diario[i]['day']['condition']['icon'], max: diario[i]['day']['maxtemp_c'], min: diario[i]['day']['mintemp_c']
         }
         cidade['daily'].push(dia)
     }
@@ -45,7 +45,7 @@ export async function criarCidade(input){
     return cidade
 }
 
-function DiaSemana(dia) {
+function diaSemana(dia) {
     let dias=['Dom','Seg','ter','Qua','Qui','Sex','Sab']
     const data = new Date(dia + "T12:00:00")
     return dias[data.getDay()]

@@ -5,6 +5,37 @@ form.addEventListener("submit",async (e)=>{
     const input = document.querySelector('input').value
     renderizar( await criarCidade(input))
 })
+const climaHoraHTML = document.getElementById('clima-hora')
+const semanaHTML = document.getElementById('semana')
+const detalhar = document.getElementById('detalhar')
+const momento = document.getElementById('clima-momento')
+const secaoEsquerda = document.getElementById('secao-equerda')
+const buttonEscuro = document.getElementById('modo-cor')
+let status = 'dia'
+const body = document.querySelector('body')
+const listaModoEscuro = [body,climaHoraHTML,detalhar,momento,secaoEsquerda]
+
+buttonEscuro.addEventListener('click',()=>{
+
+    if (status == 'noite'){
+        for(let i = 0;i<listaModoEscuro.length;i++){
+            listaModoEscuro[i].classList.add('light')
+            listaModoEscuro[i].classList.remove('dark')
+        }
+        buttonEscuro.innerHTML = '☀️'
+        status = 'dia'
+    }
+    else{
+        buttonEscuro.innerHTML = '🌙'
+        status = 'noite'
+        for(let i = 0;i<listaModoEscuro.length;i++){
+            listaModoEscuro[i].classList.remove('light')
+            listaModoEscuro[i].classList.add('dark')
+        }
+        
+    }
+    console.log(status)
+})
 
 function climaHoje(city,country,date,icon,temperature,feelsLike,humidity,wind,precipitation){
     function climaMomento(city,country,date,icon,temperature){
@@ -32,7 +63,6 @@ function climaHoje(city,country,date,icon,temperature,feelsLike,humidity,wind,pr
 }
 
 function semana(daily){
-    const semanaHTML = document.getElementById('semana')
     semanaHTML.innerHTML = '';
     for(let i = 0; i<daily.length;i++){
         semanaHTML.append(criarDia(daily[i]))
@@ -62,7 +92,6 @@ function semana(daily){
 
 }
 function climaHora(hourly){
-    const climaHoraHTML = document.getElementById('clima-hora')
     climaHoraHTML.innerHTML = ''
     for(let i = 0; i < hourly.length;i++){
         climaHoraHTML.append(criarHora(hourly[i]))
